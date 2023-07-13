@@ -1,0 +1,5 @@
+format: jb-book
+root: intro
+parts:
+    chapters:
+    - file: MiniUnits/MiniUnit2_WritingReadableScripts.ipynb
