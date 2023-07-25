@@ -5,3 +5,4 @@ chapters:
       sections:
         - file: MiniUnit2/MiniUnit2_Intro.ipynb
         - file: MiniUnit2/MiniUnit2_ReadabilityPracticeA.ipynb
+        - file: MiniUnit2/MiniUnit2_ReadabilityPracticeB.ipynb
