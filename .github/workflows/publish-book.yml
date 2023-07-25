@@ -2,6 +2,7 @@ name: publish-book
 
 # Only run this when the master branch changes
 on:
+  workflow_dispatch:
   push:
     branches:
     - main
@@ -11,7 +12,7 @@ on:
     #
     # paths:
     # - some-subfolder/**
-
+   
 # This job installs dependencies, builds the book, and pushes it to `gh-pages`
 jobs:
   deploy-book:
