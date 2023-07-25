@@ -1,4 +1,7 @@
 format: jb-book
 root: intro
 chapters:
-    - file: MiniUnits/MiniUnit2_WritingReadableScripts.ipynb
+    - file: MiniUnit2/MiniUnit2_TitlePage.md
+      sections:
+        - file: MiniUnit2/MiniUnit2_Intro.ipynb
+        - file: MiniUnit2/MiniUnit2_ReadabilityPracticeA.ipynb
