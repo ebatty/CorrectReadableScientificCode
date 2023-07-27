@@ -1,6 +1,7 @@
 format: jb-book
 root: intro
 chapters:
+    - file: MiniUnit1/MiniUnit1_WhySpendtheTime.ipynb
     - file: MiniUnit2/MiniUnit2_TitlePage.md
       sections:
         - file: MiniUnit2/MiniUnit2_Intro.ipynb
