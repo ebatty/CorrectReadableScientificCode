@@ -1,0 +1,793 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Mini-unit #5: Testing your code &#8212; Writing Correct &amp; Reproducible Scientific Code</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'MiniUnit5/MiniUnit5_TestingYourCode';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Mini-unit #3: Writing Functions" href="../MiniUnit3/MiniUnit3_WritingClearFunctions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Writing Correct & Reproducible Scientific Code</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Writing Correct & Reproducible Scientific Code
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../MiniUnit1/MiniUnit1_WhySpendtheTime.html">Mini-unit #1: Why spend the time?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../MiniUnit2/MiniUnit2_TitlePage.html">Mini-unit # 2: Writing clean scripts</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MiniUnit2/MiniUnit2_Intro.html"><strong>Intro</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MiniUnit2/MiniUnit2_ReadabilityPracticeA.html">Readability Practice A</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MiniUnit2/MiniUnit2_ReadabilityPracticeB.html">Readability Practice B</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MiniUnit2/MiniUnit2_ReadabilityPracticeD.html">Readability Practice D</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../MiniUnit3/MiniUnit3_WritingClearFunctions.html">Mini-unit #3: Writing Functions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mini-unit #5: Testing your code</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/ebatty/CorrectReadableScientificCode/main?urlpath=tree/MiniUnit5/MiniUnit5_TestingYourCode.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ebatty/CorrectReadableScientificCode/blob/main/MiniUnit5/MiniUnit5_TestingYourCode.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/MiniUnit5/MiniUnit5_TestingYourCode.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mini-unit #5: Testing your code</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mini-unit #5: Testing your code</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video">Video</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-exercise-catching-errors">Coding Exercise: Catching Errors</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-optional-add-on-using-pytest-in-vscode">Advanced (optional) add-on: Using pytest in VSCode</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="mini-unit-5-testing-your-code">
+<h1>Mini-unit #5: Testing your code<a class="headerlink" href="#mini-unit-5-testing-your-code" title="Permalink to this heading">#</a></h1>
+<p>You may recall [name] from the first mini-unit, whose code error lead to a paper retraction. He is not the only to experience this - there have been numerous examples of code errors impacting published studies [insert a few refs]. Based on his experience, [name] now implements “software-engineer level testing” of research code. This mini-unit will teach you what that means and how to do it.</p>
+<p>In this mini-unit, we will focus on testing to detect actual code errors in code you write. You should also be testing to uncover issues in how you design your processing, analysis, etc and how you use other people’s code - check out Unit [], which covers how to do this!</p>
+<p>A lot of this mini-unit is inspired by Patrick Mineault’s excellent chapter on testing in The Good Research Handbook: https://goodresearch.dev/testing.html. Check this out for further reading on the topic!</p>
+<section id="video">
+<h2>Video<a class="headerlink" href="#video" title="Permalink to this heading">#</a></h2>
+<p>This video will include handwritten notes and live coding so slides aren’t prepared.</p>
+<p>Script:</p>
+<p>Errors in code happen - they’re difficult to avoid! So, you need to be checking and testing your code to catch errors and ensure it is correct, otherwise your research conclusions could be erroneous! The previous mini-units have already set you up well to test your code - it is much easier to test a suite of small functions than one long script.</p>
+<p>We will use a concept from software engineering called a <em>unit test</em> to give us a useful framework to systematically test our code. While anyway of checking your code is a good way, using this framework can be less stressful and less work, and allow for easier refactoring of your code.</p>
+<p>So what is a unit test? It is a test of a small piece of code, like a function, to make sure it is doing what it should.</p>
+<p>Let’s back up and talk a bit about informal testing of your code.</p>
+<p>Let’s jump in with an example. This function, taken from Patrick Mineault’s chapter on Testing, computes the Fibonacci sequence, which is defined as:</p>
+<p>F(x) = F(x-1) + F(x-2)
+F(0) = 0
+F(1) = 1</p>
+<p>The first few numbers in this sequence are 0, 1, 1, 2, 3…</p>
+<p>So, how would you go about checking that you correctly wrote this function? You would probably want to try out some inputs and make sure you get the correct output.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fib</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fib</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fib</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fib</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="go">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fib</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+<span class="go">102334155</span>
+
+</pre></div>
+</div>
+<p>This is great to check inputs vs outputs, and this is essentially the idea behind unit tests. You are testing that the function is doing what it should for a bunch of different inputs.</p>
+<p>Testing your function in this way is good, but has some downsides. If you’re just calling the function via a command line interface or notebook, you may not be saving the expected outputs or any of your hard work on designing good tests . Later, if you change anything about the function and want to test it again, you might need to do it all over again!</p>
+<p><strong>Assert testing</strong>
+An easy step-up for testing is to use <code class="docutils literal notranslate"><span class="pre">assert</span></code> statements. This is a statement in Python that throws an error if the statement following assert is False. Let’s put all of our former informal tests as assert statements.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="mi">8</span>
+<span class="k">assert</span> <span class="n">fib</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span> <span class="o">==</span> <span class="mi">102334155</span>
+</pre></div>
+</div>
+<p>When working with .py files, we can include this in the same file where the function lives, wrapped in the <strong>name</strong> == ‘<strong>main</strong>’ statement so we can directly run the file to run the tests. This way, the tests are right there with the functions and are documented well. You don’t have to remember what the expected output of your test should be, an error will be thrown if one of the tests fails. Now, you can refactor the function and still run all the same tests by running the file directly.</p>
+<p><strong>Testing suite</strong> Python has several frameworks for unit tests that allow you to group all your tests together and run them in a more automated way - you don’t even have to remember to directly run each file to trigger the assert tests! I’ll cover one such framework, <code class="docutils literal notranslate"><span class="pre">pytest</span></code>, in the advanced optional add-on. The idea is very similar to the assert statements - you’re just wrapping them in functions and then you can run all the tests in your whole code base at once. It also enables better error messages when tests fail than the assert strategy, and allows you to test more. For example, it allows you to test that a function raises an error for an invalid input. All in all, I highly recommend checking out the video on this!</p>
+<p><strong>What to test</strong>: Whether you are using the assert simple approach or a full testing suite, what matters most is how you design the tests. You need to be very explicit about what you expect as the output and compare to that. In the fibonacci function the inputs and outputs are quite simple, but when you are dealing with more complex functions that do analysis, you may need to spend a bit of time computing what the output should be by hand.</p>
+<p>What sorts of things should you test?</p>
+<ul class="simple">
+<li><p>Correctness for typical inputs</p></li>
+<li><p>Edge cases (weird inputs: often very small or large numbers)</p></li>
+<li><p>Errors for bad inputs (what happens if you input -1?)</p></li>
+<li><p>Shape of inputs and outputs</p></li>
+</ul>
+<p>We are focusing on testing pure functions without side effects as that’s what we recommend writing. If you have more complicated functions or classes that depend on some state (like a random seed) or are doing something other than simply returning outputs (like saving out data), your tests need to be a little more complex.</p>
+<p>If you thoroughly test each function in your _src, you can be much more confident that your scientific code is accurate and that your results are valid! You can also save yourself time as you do not need to recheck everything when refactoring your code.  As a bonus, you’ll often find that thinking through the tests gives you more insight into what the function should be doing, especially for odd cases. In fact, some coders find this so useful that they do <em>test-driven development</em>, which means they write all the tests for the function before actually writing the function.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="coding-exercise-catching-errors">
+<h1>Coding Exercise: Catching Errors<a class="headerlink" href="#coding-exercise-catching-errors" title="Permalink to this heading">#</a></h1>
+<p>For each example below, try writing multiple unit tests for it using the <code class="docutils literal notranslate"><span class="pre">assert</span></code> statement strategy. Within this context, write each <code class="docutils literal notranslate"><span class="pre">assert</span></code> statement in a separate code cell, otherwise if an earlier one fails you won’t even run the following ones.</p>
+<p>Try to find any errors the function is making and if they do exist, figure out what the error is. If you have time, try fixing the function to pass your tests - it’ll be good practice!</p>
+<p><strong>A)</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks if a number is prime.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      number (int): The number to be checked.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      bool: True if the number is prime, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">possible_factor</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">%</span> <span class="n">possible_factor</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write your assert statements to test is_prime here (remember to have one assert statement per code cell)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Did you find any errors in the function?</p>
+<textarea name="comments" id="comments">
+...
+</textarea><br />
+<input type="submit" value="Submit" /><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Our solution</span>
+
+<span class="k">assert</span> <span class="n">is_prime</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">==</span><span class="kc">False</span>
+<span class="k">assert</span> <span class="n">is_prime</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="kc">False</span>
+<span class="k">assert</span> <span class="n">is_prime</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">==</span><span class="kc">False</span>
+<span class="k">assert</span> <span class="n">is_prime</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">==</span><span class="kc">True</span>
+<span class="k">assert</span> <span class="n">is_prime</span><span class="p">(</span><span class="mi">797</span><span class="p">)</span><span class="o">==</span><span class="kc">True</span>
+<span class="k">assert</span> <span class="n">is_prime</span><span class="p">(</span><span class="mi">14161729</span><span class="p">)</span><span class="o">==</span><span class="kc">True</span>
+<span class="k">assert</span> <span class="n">is_prime</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">)</span><span class="o">==</span><span class="kc">False</span>
+<span class="k">assert</span> <span class="n">is_prime</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span><span class="o">==</span><span class="kc">False</span>
+<span class="c1"># note that ideally we&#39;d check that there is an exception for weird inputs like a</span>
+<span class="c1">#  string, but we need the testing suite to do this! assert can&#39;t check this</span>
+
+<span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks if a number is prime.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      number (int): The number to be checked.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      bool: True if the number is prime, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">number</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+      <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">for</span> <span class="n">possible_factor</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">%</span> <span class="n">possible_factor</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2081</span><span class="o">/</span><span class="mf">30662821.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Our solution</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="k">assert</span> <span class="n">is_prime</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">==</span><span class="kc">False</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">assert</span> <span class="n">is_prime</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="kc">False</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">assert</span> <span class="n">is_prime</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">==</span><span class="kc">False</span>
+
+<span class="ne">AssertionError</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>B)</strong></p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">find_nth_from_ends</span></code> should get the nth largest and smallest unique values from the input numpy array. So for example, if n = 2 and there are multiple entries of 100 tied for maximum, the second largest value would not be 100, it would be the next highest value present in the array.</p>
+<p>Brief reminder: you can create a 1-d array in numpy with:</p>
+<p><code class="docutils literal notranslate"><span class="pre">my_array</span> <span class="pre">=</span> <span class="pre">np.array([1,</span> <span class="pre">5,</span> <span class="pre">0])</span></code></p>
+<p>and a 2-d array with:</p>
+<p><code class="docutils literal notranslate"><span class="pre">my_array</span> <span class="pre">=</span> <span class="pre">np.array([[4,</span> <span class="pre">1,</span> <span class="pre">2],</span> <span class="pre">[5,</span> <span class="pre">5,</span> <span class="pre">0]])</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">find_nth_from_ends</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the nth largest and smallest values in the array</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">        array (ndarray): the array in question</span>
+
+<span class="sd">        n (int): how many numbers lower than max/higher than min to return</span>
+
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">        float/int, float/int: nth largest value, nth smallest value (data type matches array)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Get unique values</span>
+    <span class="n">unique_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+
+    <span class="c1"># Sort array from smallest to biggest</span>
+    <span class="n">sorted_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">unique_values</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">sorted_array</span><span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">],</span> <span class="n">sorted_array</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write your assert statements (remember to have one assert statement per code cell)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Did you find any errors in the function?</p>
+<textarea name="comments" id="comments">
+...
+</textarea><br />
+<input type="submit" value="Submit" /><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Our solution</span>
+
+<span class="c1"># One dimensional array</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="n">outs</span> <span class="o">=</span> <span class="n">find_nth_from_ends</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">outs</span> <span class="o">==</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># Two dimensional array</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">outs</span> <span class="o">=</span> <span class="n">find_nth_from_ends</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">outs</span> <span class="o">==</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># All the same value</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span> <span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">outs</span> <span class="o">=</span> <span class="n">find_nth_from_ends</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">outs</span> <span class="o">==</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Negative n</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">outs</span> <span class="o">=</span> <span class="n">find_nth_from_ends</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">outs</span> <span class="o">==</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="c1"># Larger n than number of elements</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">outs</span> <span class="o">=</span> <span class="n">find_nth_from_ends</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">find_nth_from_ends</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the nth largest and smallest values in the array</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">        array (ndarray): the array in question</span>
+
+<span class="sd">        n (int): how many numbers lower than max/higher than min to return</span>
+
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">        float/int, float/int: nth largest value, nth smallest value (data type matches array)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Get unique values</span>
+    <span class="n">unique_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+
+    <span class="c1"># Sort array from smallest to biggest</span>
+    <span class="n">sorted_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">unique_values</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Check if n is larger than array size</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="n">array</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;n is bigger than the number of elements in the array&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sorted_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sorted_array</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sorted_array</span><span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">],</span> <span class="n">sorted_array</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2081</span><span class="o">/</span><span class="mf">3202946684.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># All the same value</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span> <span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">outs</span> <span class="o">=</span> <span class="n">find_nth_from_ends</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="k">assert</span> <span class="n">outs</span> <span class="o">==</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> 
+
+<span class="nn">/tmp/ipykernel_2081/500920466.py</span> in <span class="ni">find_nth_from_ends</span><span class="nt">(array, n)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">sorted_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">unique_values</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> 
+<span class="ne">---&gt; </span><span class="mi">24</span>     <span class="k">return</span> <span class="n">sorted_array</span><span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">],</span> <span class="n">sorted_array</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="ne">IndexError</span>: index -2 is out of bounds for axis 0 with size 1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Video live-coding solution above and talking through it.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="advanced-optional-add-on-using-pytest-in-vscode">
+<h1>Advanced (optional) add-on: Using pytest in VSCode<a class="headerlink" href="#advanced-optional-add-on-using-pytest-in-vscode" title="Permalink to this heading">#</a></h1>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "ebatty/CorrectReadableScientificCode",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./MiniUnit5"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../MiniUnit3/MiniUnit3_WritingClearFunctions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mini-unit #3: Writing Functions</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mini-unit #5: Testing your code</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video">Video</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-exercise-catching-errors">Coding Exercise: Catching Errors</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-optional-add-on-using-pytest-in-vscode">Advanced (optional) add-on: Using pytest in VSCode</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ella Batty
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
