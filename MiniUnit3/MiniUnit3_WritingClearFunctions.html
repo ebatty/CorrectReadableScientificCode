@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Mini-unit #3: Writing Functions &#8212; Writing Correct &amp; Reproducible Scientific Code</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'MiniUnit3/MiniUnit3_WritingClearFunctions';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Readability Practice D" href="../MiniUnit2/MiniUnit2_ReadabilityPracticeD.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Writing Correct & Reproducible Scientific Code</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Writing Correct & Reproducible Scientific Code
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../MiniUnit1/MiniUnit1_WhySpendtheTime.html">Mini-unit #1: Why spend the time?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../MiniUnit2/MiniUnit2_TitlePage.html">Mini-unit # 2: Writing clean scripts</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MiniUnit2/MiniUnit2_Intro.html"><strong>Intro</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MiniUnit2/MiniUnit2_ReadabilityPracticeA.html">Readability Practice A</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MiniUnit2/MiniUnit2_ReadabilityPracticeB.html">Readability Practice B</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MiniUnit2/MiniUnit2_ReadabilityPracticeD.html">Readability Practice D</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mini-unit #3: Writing Functions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/ebatty/CorrectReadableScientificCode/main?urlpath=tree/MiniUnit3/MiniUnit3_WritingClearFunctions.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ebatty/CorrectReadableScientificCode/blob/main/MiniUnit3/MiniUnit3_WritingClearFunctions.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/MiniUnit3/MiniUnit3_WritingClearFunctions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mini-unit #3: Writing Functions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-functions">Why use functions?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brainstorming-exercise">Brainstorming Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#video">Video</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-write-a-clear-and-good-function">How do you write a clear and good function?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-it-single-purpose">Keep it single-purpose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-it-short">Keep it short</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#name-it-well">Name it well</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avoid-side-effects">Avoid side-effects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-docstring">Write a docstring</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-exercise-translating-a-script-to-clear-functions">Coding Exercise: Translating a script to clear functions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="mini-unit-3-writing-functions">
+<h1>Mini-unit #3: Writing Functions<a class="headerlink" href="#mini-unit-3-writing-functions" title="Permalink to this heading">#</a></h1>
+<p>In this mini-unit, you’ll learn how to write clear function, and be motivated to do so!</p>
+<section id="why-use-functions">
+<h2>Why use functions?<a class="headerlink" href="#why-use-functions" title="Permalink to this heading">#</a></h2>
+<section id="brainstorming-exercise">
+<h3>Brainstorming Exercise<a class="headerlink" href="#brainstorming-exercise" title="Permalink to this heading">#</a></h3>
+<p><em>Might remove this if the mini-unit is too long</em></p>
+<p>Please reflect on the following questions one at a time. If completing this with others, please take a few minutes to brainstorm by yourselves for each question and then discuss.</p>
+<ul class="simple">
+<li><p>What are some advantages of using functions in code?</p></li>
+<li><p>Any initial thoughts as to general practices that might ensure each function is clear and useful? No worries if not - you’ll learn about this in this mini-unit!</p></li>
+</ul>
+<textarea name="comments" id="comments">
+...
+</textarea><br />
+<input type="submit" value="Submit" /></section>
+<section id="video">
+<h3>Video<a class="headerlink" href="#video" title="Permalink to this heading">#</a></h3>
+<p>Overview: Voice-over with handwritten notes. Purpose is to motivate using functions</p>
+<p>Script:</p>
+<p>Functional programming is type of programming where you structure code around functions. I personally experienced a huge jump in the usability of my code when I moved from primarily using long scripts to prioritizing functions. There are a couple big advantages of using functions. One is that you are ensuring you can re-use your own code more easily! Instead of copying and pasting snippets of code if you’re doing the same computation in different parts of your code, you can call the same function multiple times. This also ensures you’re following a key coding principle: DRY, which means don’t repeat yourself.</p>
+<p>Functions also can make the flow of your code clearer. Compare this long script to code that performs the same thing but that calls functions. It’s much quicker to read the shorter script that calls functions. You can always go look in those functions if you want to see all the details, but often you won’t need to as you can tell what it is doing from the name!</p>
+<p>Using functions also allows you to better test your code. You can test that each function is correct and does what it should, which is more manageable than testing a whole long script. We’ll return to this idea in the later mini-unit on testing code.</p>
+</section>
+</section>
+<section id="how-do-you-write-a-clear-and-good-function">
+<h2>How do you write a clear and good function?<a class="headerlink" href="#how-do-you-write-a-clear-and-good-function" title="Permalink to this heading">#</a></h2>
+<p>So, now you’re motivated to write some functions in your code! But how do you make sure your function is a good function? What is a good function? Luckily, there are some guidelines to follow around this! Click on each cleaning product below to learn about a best practice to ensure clean functions.</p>
+<p>Bucket title “Good functions” with cleaning products sticking out of it. Ideally, you can click on each one to open up one of the following sections below it. This would make it more interactive/fun and would avoid a really long notebook.</p>
+<section id="keep-it-single-purpose">
+<h3>Keep it single-purpose<a class="headerlink" href="#keep-it-single-purpose" title="Permalink to this heading">#</a></h3>
+<p><em>Each of these will be a short (1 minute) handwritten video with voice over. The text will also appear below as a dropdown recap of the video</em></p>
+<p>Each function should do exactly one thing and one thing only. This is known as the <a class="reference external" href="https://en.wikipedia.org/wiki/Single-responsibility_principle">single-responsibilty principle</a>.</p>
+<p>A good test of whether a function is single purpose is whether you can succintly summarize what the function does without using the word and. If it does more than one thing, you should split it up!</p>
+<p>Possible single things that a function could do include computing a single quantity, plotting a quantity, loading in data, and saving outputs.</p>
+<p>Keeping functions single-purpose means they are more re-usable, easier to reason about, and easier to test, and it keeps your code more organized and clear.</p>
+<p>Exercise</p>
+<p>Take a look at each of the following functions. Are they single-purpose? If not, outline how you would split it into multiple functions that are single-purpose.</p>
+<p><em>Note to CENTER: This could be made more aesthetically pleasing with more of a flashcard interactive style if possible. Each code snippet on one panel and you click on it to flip it over and see the answer</em></p>
+<p>Example A:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">load_and_plot_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+
+    <span class="c1"># Load spikes</span>
+
+
+
+
+</pre></div>
+</div>
+<p>Solution:</p>
+<p>Example B:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span>
+</pre></div>
+</div>
+<p>Example C:</p>
+</section>
+<section id="keep-it-short">
+<h3>Keep it short<a class="headerlink" href="#keep-it-short" title="Permalink to this heading">#</a></h3>
+<p>Functions should be short. Robert Martin in Clean Code argues that functions should rarely be more than 20 lines of code. The reasons to keep functions short are similar to those for keeping functions single-purpose: a short function is easier to understand, reason about, and test.</p>
+<p>As a bonus, keeping functions short often helps you keep them single-purpose and vice versa.</p>
+<p>[Needs workshopping] Note there is a bit of debate around really short functions - Robert Martin advocates that functions can be as short as 3 lines of code, but others point out that this can make code more difficult to read if you constantly have to go find those functions to understand the code. This is a good reminder that these are guidelines rather than hard and fast rules!</p>
+</section>
+<section id="name-it-well">
+<h3>Name it well<a class="headerlink" href="#name-it-well" title="Permalink to this heading">#</a></h3>
+<p>Remember in the last mini-unit when you learned how important it is to choose good variable names? It is just as important to name functions well! A user of the code should be able to tell what the function does by its name. This ensures that you can read the main script that calls functions and still understand what is happening from the name, without having to go find the function code and look at it.</p>
+<p>Function names should follow many of the same guidelines as variable names: they should be informative, consistent, pronounceable, searchable, distinct, and follow your code language’s style guide. There is one important difference - function names should be verbs, not nouns. This is because functions do things!</p>
+<p>As a bonus, the process of writing a descriptive function name often flags if it is not single purpose. If you are writing a function name and it has <code class="docutils literal notranslate"><span class="pre">and</span></code> in it, the function is probably not single purpose as it is doing two things!</p>
+<p><strong>Exercise</strong></p>
+<p>Below, we define a few functions and then call them from a main script. Without changing any code, re-name the functions both where they are defined and where they are called in the main script.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># example</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Reflection:</strong> Which version, the original or solution, is easier to quickly read and understand?</p>
+</section>
+<section id="avoid-side-effects">
+<h3>Avoid side-effects<a class="headerlink" href="#avoid-side-effects" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="write-a-docstring">
+<h3>Write a docstring<a class="headerlink" href="#write-a-docstring" title="Permalink to this heading">#</a></h3>
+<p>In Python, functions are documented using strings that appear right after its definition. There are different styles for how to write this docstrings, among the most popular are the <a class="reference external" href="https://github.com/google/styleguide/blob/gh-pages/pyguide.md#38-comments-and-docstrings">Google style</a>, the <span class="xref myst">Numpy style</span>, and the <a class="reference external" href="https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html">reStructuredText style</a>. We’ll cover the Google style, of which you can find more examples <a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">here</a>. You are welcome to choose whatever style suits you best though - they’re quite similar in terms of content.</p>
+<p>In the cell belo, we have a function that computes the volume of a cone, with  a Google style docstring.</p>
+<p>As you can see, a Google style docstring is wrapped in triple quotes “””. It has a brief description next to the first set of triple quotes. Under “Args”, you list the arguments by name, including their required data type (if any) and a brief description. Under “Returns”, you describe what is returned, including the data type and a brief description. You can optionally include examples to illustrate how to use the function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="k">def</span> <span class="nf">calculate_cone_volume</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Calculate the volume of a cone</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    radius (float): the radius of the bottom circle of the cone</span>
+<span class="sd">    height (float): the height of the cone (from bottom circle up to point)</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    float: The volume of the cone.</span>
+
+<span class="sd">  Example:</span>
+<span class="sd">      &gt;&gt;&gt; calculate_cone_volume(3, 7)</span>
+<span class="sd">      65.9734</span>
+
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">height</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Writing a docstring is better than just standard comments because Python expects docstrings, which means there are some cool things you can do! For example, you can use the command <code class="docutils literal notranslate"><span class="pre">help</span></code> with your function name to quickly see the doc string</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">calculate_cone_volume</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on function calculate_cone_volume in module __main__:
+
+calculate_cone_volume(radius, height)
+    Calculate the volume of a cone
+    
+    Args:
+      radius (float): the radius of the bottom circle of the cone
+      height (float): the height of the cone (from bottom circle up to point)
+    
+    Returns:
+      float: The volume of the cone.
+    
+    Example:
+        &gt;&gt;&gt; calculate_cone_volume(3, 7)
+        65.9734
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise</strong></p>
+<p>Write a Google style doc string for the function below</p>
+</section>
+</section>
+<section id="coding-exercise-translating-a-script-to-clear-functions">
+<h2>Coding Exercise: Translating a script to clear functions<a class="headerlink" href="#coding-exercise-translating-a-script-to-clear-functions" title="Permalink to this heading">#</a></h2>
+<p>Take this analysis script, which you cleaned up already in mini unit 2, and split it into functions that are called in a main script below those functions. Use all the best practices you just learned, including writing docstrings for the functions!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "ebatty/CorrectReadableScientificCode",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./MiniUnit3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../MiniUnit2/MiniUnit2_ReadabilityPracticeD.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Readability Practice D</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-functions">Why use functions?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brainstorming-exercise">Brainstorming Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#video">Video</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-write-a-clear-and-good-function">How do you write a clear and good function?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-it-single-purpose">Keep it single-purpose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-it-short">Keep it short</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#name-it-well">Name it well</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avoid-side-effects">Avoid side-effects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-docstring">Write a docstring</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-exercise-translating-a-script-to-clear-functions">Coding Exercise: Translating a script to clear functions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ella Batty
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
