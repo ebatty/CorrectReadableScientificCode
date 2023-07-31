@@ -57,6 +57,8 @@ def link_hidden_cells(content):
         updated_cell = updated_cells[i_updated_cell]
         if "source" not in cell:
             continue
+        if len(cell['source']) == 0:
+            continue
         source = cell['source'][0]
 
         if source.startswith("#") and cell['cell_type'] == 'markdown':
