@@ -445,18 +445,52 @@ document.write(`
 <p>Possible single things that a function could do include computing a single quantity, plotting a quantity, loading in data, and saving outputs.</p>
 <p>Keeping functions single-purpose means they are more re-usable, easier to reason about, and easier to test, and it keeps your code more organized and clear.</p>
 <p>Exercise</p>
-<p>Take a look at each of the following functions. Are they single-purpose? If not, outline how you would split it into multiple functions that are single-purpose.</p>
+<p>Take a look at each of the following functions. Are they single-purpose? If not, outline how you would split it into multiple functions that are single-purpose. No need to actually do so in code, just outline what new functions you would create in text.</p>
 <p><em>Note to CENTER: This could be made more aesthetically pleasing with more of a flashcard interactive style if possible. Each code snippet on one panel and you click on it to flip it over and see the answer</em></p>
 <p>Example A:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">load_and_plot_data</span><span class="p">(</span><span class="n">responses</span><span class="p">):</span>
 
-    <span class="c1"># code to load a bunch of data</span>
+    <span class="c1">### Load data</span>
+    <span class="n">spikes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s1">spikes.npy&#39;</span><span class="p">)</span>
+    <span class="n">stim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s1">stim.npy&#39;</span><span class="p">)</span>
+    <span class="n">bin_width</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s1">bin_width.npy&#39;</span><span class="p">)</span>
 
-    <span class="c1"># code to make plots of all the data</span>
+
+    <span class="c1">### Plot data</span>
+
+    <span class="c1"># Compute number of time steps in one second</span>
+    <span class="n">n_steps_per_second</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">bin_width</span><span class="p">)</span>  
+
+    <span class="c1"># Get time of each time step (to have as x axis)</span>
+    <span class="n">time_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_steps_per_second</span><span class="p">)</span><span class="o">*</span><span class="n">bin_width</span>
+
+    <span class="c1"># Make figure</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_vec</span><span class="p">,</span> <span class="n">stim</span><span class="p">[:</span><span class="n">n_steps_per_second</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Stimulus&#39;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Intensity&#39;</span><span class="p">)</span>
+
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_vec</span><span class="p">,</span> <span class="n">spikes</span><span class="p">[:</span><span class="n">n_steps_per_second</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Retinal ganglion cell response&#39;</span><span class="p">,</span>
+                <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Number of spikes&#39;</span><span class="p">,</span>
+                <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="c1"># Save plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;data.png&#39;</span><span class="p">)</span>
 
 
 </pre></div>
 </div>
+<textarea name="comments" id="comments">
+...
+</textarea><br />
+<input type="submit" value="Submit" />
+<details>
+<summary> <font color='blue'>Click here for solution explanation </font></summary>
+This function loads in the data, plots it, and saves out the plot. I would probably split it into 2-3 functions: a data loading function and a plotting function. Instead of saving out the plot inside the plotting function, I would either create another save plot function or would just do it in the script when I call the plotting data function.
+</details>
 <p>Example B (from https://goodresearch.dev/decoupled.html)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words_in_file</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">out_file</span><span class="p">):</span>
     <span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
@@ -476,7 +510,14 @@ document.write(`
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">k</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
+<textarea name="comments" id="comments">
+...
+</textarea><br />
+<input type="submit" value="Submit" />
+<details>
+<summary> <font color='blue'>Click here for solution explanation </font></summary>
+This function loads in the data, counts the words in it, and saves out the results all in one function. I would probably split it into three functions: a data loading function, a computation function that counts the words, and a data saving function.
+</details></section>
 <section id="keep-it-short">
 <h3>Keep it short<a class="headerlink" href="#keep-it-short" title="Permalink to this heading">#</a></h3>
 <p>Functions should be short. Robert Martin in Clean Code argues that functions should rarely be more than 20 lines of code. The reasons to keep functions short are similar to those for keeping functions single-purpose: a short function is easier to understand, reason about, and test.</p>
@@ -532,7 +573,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2047</span><span class="o">/</span><span class="mf">3873640096.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1960</span><span class="o">/</span><span class="mf">3873640096.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">## Main script</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">spikes</span><span class="p">,</span> <span class="n">stimulus</span> <span class="o">=</span> <span class="n">data</span><span class="p">(</span><span class="s1">&#39;/home/&#39;</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> 
@@ -561,6 +602,20 @@ document.write(`
 <section id="avoid-side-effects">
 <h3>Avoid side-effects<a class="headerlink" href="#avoid-side-effects" title="Permalink to this heading">#</a></h3>
 <p>Pure Python functions take in inputs and return outputs, and have no other effect. However, Python functions can have side effects, including modifying mutable input data, modifying global variables, or reading from or saving to files.</p>
+<p>Let’s take a look at this example to see one example where the inputs are modified unintenionally:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convert_celsius_to_farenheit</span><span class="p">(</span><span class="n">temperatures</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">temperatures</span><span class="p">)):</span>
+        <span class="n">temperatures</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*=</span> <span class="p">(</span><span class="mi">9</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">temperatures</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">32</span>
+    <span class="k">return</span> <span class="n">temperatures</span>
+
+<span class="n">temperatures_celsius</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mf">22.5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mf">28.1</span><span class="p">]</span>
+<span class="n">temperatures_farenheit</span> <span class="o">=</span> <span class="n">convert_celsius_to_farenheit</span><span class="p">(</span><span class="n">temperatures_celsius</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>[show using live code that the inputs are changed]</p>
+<p>As much as possible, you should try to keep your functions pure since this makes them easier to reason about and test. I think it’s best, especially as a newer coder, to avoid updating the inputs in-place and return outputs instead.</p>
+<p>Sometimes side effects are impossible to avoid. For example, you probably want data loading and saving functions! Critically, these side effect funtions should be isolated. You should not load data and analyze it in one function. This would violate the single responsibility principle anyway.</p>
 </section>
 <section id="write-a-docstring">
 <h3>Write a docstring<a class="headerlink" href="#write-a-docstring" title="Permalink to this heading">#</a></h3>
@@ -658,7 +713,17 @@ calculate_cone_volume(radius, height)
 </section>
 <section id="coding-exercise-translating-a-script-to-clear-functions">
 <h2>Coding Exercise: Translating a script to clear functions<a class="headerlink" href="#coding-exercise-translating-a-script-to-clear-functions" title="Permalink to this heading">#</a></h2>
-<p>Break this analysis script into functions that are called in a main script below those functions. Use all the best practices you just learned, including writing docstrings for the functions!</p>
+<p>Break this analysis script into functions that are called in a main script below those functions. Use all the best practices you just learned, including writing docstrings for the functions! To keep the exercise manageable, some of the functions can be very short.</p>
+<p><strong>Data:</strong></p>
+<p>The data is the same as from the last example in Mini-unit # 2.</p>
+<p>We have recordings from 9 different motor cortex neurons from a macaque. We have recorded these neurons while the macaque is reaching to 8 different directions.</p>
+<p>The spiking data array <code class="docutils literal notranslate"><span class="pre">spikes</span></code> is 9 by 1000 by 1500. The first dimension corresponds to different neurons, the second to 1000 different trials, and the third to 1500 time bins of width 1 ms each. If the neuron spikes during that time bin on that trial, the entry is 1, otherwise it is 0. The reach movement onset occurs at the 750th time bin.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">trial_angles</span></code> array is shape (1000,). It contains the reaching angle on each trial - which is one of 8 unique reach angles. These 8 unique values are contained in the <code class="docutils literal notranslate"><span class="pre">reaching_angles</span></code> array.</p>
+<p><strong>Analysis:</strong></p>
+<p>In the code below, we first plot the data for an example neuron. We show the spike rasters for each reach angle.</p>
+<p>Next, for each neuron we look at how the firing rate of neuron 2 varies by angle. For a given angle, we compute the mean firing rate in spikes per second for each reach angle. We only consider the 500th to 1000th time bin on each trial(so the chunk of time around reach onset).</p>
+<p>We compute the preferred angle of the neuron (the angle that leads to the highest firing rate). Finally, we compute a tuning index, which is a metric of how tuned the neuron is.</p>
+<p>We then plot a histogram of the tuning indices across all neurons and a histogram of the preferred reach angle only for neurons that are tuned.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -671,29 +736,31 @@ calculate_cone_volume(radius, height)
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># This code needs to be cleaned up, with spikes generated for all neurons, and hidden (should probaby load in data)</span>
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">():</span>
+    <span class="n">n_neurons</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="n">n_trials</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">n_time_bins_per_trial</span> <span class="o">=</span> <span class="mi">1500</span>
+    <span class="n">bin_width</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="c1"># seconds</span>
+    <span class="n">reaching_angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">270</span><span class="p">,</span> <span class="mi">315</span><span class="p">])</span>
+    <span class="n">n_angles</span> <span class="o">=</span> <span class="n">reaching_angles</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="n">n_neurons</span> <span class="o">=</span> <span class="mi">8</span>
-<span class="n">n_trials</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">n_time_bins_per_trial</span> <span class="o">=</span> <span class="mi">1500</span>
-<span class="n">bin_width</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="c1"># seconds</span>
-<span class="n">reaching_angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">270</span><span class="p">,</span> <span class="mi">315</span><span class="p">])</span>
-<span class="n">n_angles</span> <span class="o">=</span> <span class="n">reaching_angles</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c1"># Generate even number of trials for each angle, then shuffle</span>
-<span class="n">trial_angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">reaching_angles</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1000</span><span class="o">/</span><span class="mi">8</span><span class="p">))</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">trial_angles</span><span class="p">)</span>
+    <span class="c1"># Generate even number of trials for each angle, then shuffle</span>
+    <span class="n">trial_angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">reaching_angles</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1000</span><span class="o">/</span><span class="mi">8</span><span class="p">))</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">trial_angles</span><span class="p">)</span>
 
 
-<span class="n">spikes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_neurons</span><span class="p">,</span> <span class="n">n_trials</span><span class="p">,</span> <span class="n">n_time_bins_per_trial</span><span class="p">))</span>
+    <span class="n">spikes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_neurons</span><span class="p">,</span> <span class="n">n_trials</span><span class="p">,</span> <span class="n">n_time_bins_per_trial</span><span class="p">))</span>
 
-<span class="n">baseline_firing_rate</span> <span class="o">=</span> <span class="mi">15</span>
-<span class="n">firing_rates_per_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
-<span class="n">binned_spikes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_trials</span><span class="p">,</span> <span class="p">))</span>
-<span class="k">for</span> <span class="n">i_trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_trials</span><span class="p">):</span>
-    <span class="n">reach_firing_rates</span> <span class="o">=</span> <span class="mi">15</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1500</span><span class="p">))</span>
-    <span class="n">angle_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">reaching_angles</span> <span class="o">==</span> <span class="n">trial_angles</span><span class="p">[</span><span class="n">i_trial</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">reach_firing_rates</span><span class="p">[(</span><span class="mi">750</span> <span class="o">-</span> <span class="mi">250</span><span class="p">):(</span><span class="mi">750</span> <span class="o">+</span> <span class="mi">250</span><span class="p">)]</span> <span class="o">=</span> <span class="n">firing_rates_per_angle</span><span class="p">[</span><span class="n">angle_pos</span><span class="p">]</span>
-    <span class="n">spikes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_trial</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">reach_firing_rates</span> <span class="o">*</span> <span class="n">bin_width</span><span class="p">)</span>
+    <span class="n">baseline_firing_rate</span> <span class="o">=</span> <span class="mi">15</span>
+    <span class="n">firing_rates_per_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+    <span class="n">binned_spikes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_trials</span><span class="p">,</span> <span class="p">))</span>
+    <span class="k">for</span> <span class="n">i_trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_trials</span><span class="p">):</span>
+        <span class="n">reach_firing_rates</span> <span class="o">=</span> <span class="mi">15</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1500</span><span class="p">))</span>
+        <span class="n">angle_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">reaching_angles</span> <span class="o">==</span> <span class="n">trial_angles</span><span class="p">[</span><span class="n">i_trial</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">reach_firing_rates</span><span class="p">[(</span><span class="mi">750</span> <span class="o">-</span> <span class="mi">250</span><span class="p">):(</span><span class="mi">750</span> <span class="o">+</span> <span class="mi">250</span><span class="p">)]</span> <span class="o">=</span> <span class="n">firing_rates_per_angle</span><span class="p">[</span><span class="n">angle_pos</span><span class="p">]</span>
+        <span class="n">spikes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_trial</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">reach_firing_rates</span> <span class="o">*</span> <span class="n">bin_width</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">spikes</span><span class="p">,</span> <span class="n">trial_angles</span><span class="p">,</span> <span class="n">reaching_angles</span>
 </pre></div>
 </div>
 </div>
@@ -704,26 +771,30 @@ calculate_cone_volume(radius, height)
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="c1">## Generate data</span>
-<span class="c1"># will turn above hidden cell into function and call it here</span>
+<span class="c1">## Load data</span>
+<span class="n">spikes</span><span class="p">,</span> <span class="n">trial_angles</span><span class="p">,</span> <span class="n">reaching_angles</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>
 
 <span class="c1">## Plot rasters for example neuron</span>
 <span class="n">example_neuron_index</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">## Turn data into format needed for plotting rasters</span>
+<span class="c1"># Get actual spike times from binned spikes as eventplot expects this format</span>
+<span class="c1">## This is an odd format - it is a dictionary of a list of arrays. Each array in the list is the spike times</span>
+<span class="c1"># for a different trial</span>
+<span class="n">spike_times</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i_angle</span><span class="p">,</span> <span class="n">angle</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reaching_angles</span><span class="p">):</span>
+  <span class="n">spike_times</span><span class="p">[</span><span class="n">angle</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">this_angle_trial_indices</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">trial_angles</span><span class="o">==</span><span class="n">angle</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="k">for</span> <span class="n">i_trial</span> <span class="ow">in</span> <span class="n">this_angle_trial_indices</span><span class="p">:</span>
+      <span class="n">spike_times_for_trial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">spikes</span><span class="p">[</span><span class="n">example_neuron_index</span><span class="p">,</span> <span class="n">i_trial</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+      <span class="n">spike_times</span><span class="p">[</span><span class="n">angle</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spike_times_for_trial</span><span class="p">)</span>
+
+<span class="c1"># Make plot</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">i_angle</span><span class="p">,</span> <span class="n">angle</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reaching_angles</span><span class="p">):</span>
-
-    <span class="c1"># Get actual spike times from binned spikes as eventplot expects this format</span>
-    <span class="c1">## This is an odd format - it is a list of arrays. Each array is the spike times</span>
-    <span class="c1"># for a different trial</span>
-    <span class="n">spike_times</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">this_angle_trial_indices</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">trial_angles</span><span class="o">==</span><span class="n">angle</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">i_trial</span> <span class="ow">in</span> <span class="n">this_angle_trial_indices</span><span class="p">:</span>
-        <span class="n">spike_times_for_trial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">spikes</span><span class="p">[</span><span class="n">example_neuron_index</span><span class="p">,</span> <span class="n">i_trial</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">spike_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spike_times_for_trial</span><span class="p">)</span>
-
     <span class="c1"># Plot spikes</span>
-    <span class="n">axes</span><span class="p">[</span><span class="n">i_angle</span><span class="p">]</span><span class="o">.</span><span class="n">eventplot</span><span class="p">(</span><span class="n">spike_times</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i_angle</span><span class="p">]</span><span class="o">.</span><span class="n">eventplot</span><span class="p">(</span><span class="n">spike_times</span><span class="p">[</span><span class="n">angle</span><span class="p">],</span> <span class="n">colors</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
 
     <span class="c1"># Add vertical line at reach movement onset</span>
     <span class="n">axes</span><span class="p">[</span><span class="n">i_angle</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">750</span><span class="p">,</span> <span class="mi">750</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
@@ -744,8 +815,8 @@ calculate_cone_volume(radius, height)
 <span class="c1">### Compute tuning of each neuron</span>
 <span class="n">n_neurons</span> <span class="o">=</span> <span class="mi">8</span>
 <span class="n">tuning_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_neurons</span><span class="p">,))</span>
-<span class="n">preferred_orientations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_neurons</span><span class="p">,))</span>
-<span class="k">for</span> <span class="n">i_neuron</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+<span class="n">preferred_angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_neurons</span><span class="p">,))</span>
+<span class="k">for</span> <span class="n">i_neuron</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_neurons</span><span class="p">):</span>
 
     <span class="c1"># Compute average firing rate per angle</span>
     <span class="n">average_firing_rate_per_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_angles</span><span class="p">,))</span>
@@ -753,23 +824,75 @@ calculate_cone_volume(radius, height)
         <span class="n">relevant_trials</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">trial_angles</span><span class="o">==</span><span class="n">angle</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">average_firing_rate_per_angle</span><span class="p">[</span><span class="n">i_angle</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spikes</span><span class="p">[</span><span class="n">i_neuron</span><span class="p">,</span> <span class="n">relevant_trials</span><span class="p">,</span> <span class="mi">500</span><span class="p">:</span><span class="mi">1000</span><span class="p">])</span> <span class="o">/</span> <span class="n">relevant_trials</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">500</span> <span class="o">*</span> <span class="n">bin_width</span><span class="p">)</span>
 
-    <span class="c1"># Get preferred orientation</span>
-    <span class="n">preferred_orientations</span> <span class="o">=</span> <span class="n">reaching_angles</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">average_firing_rate_per_angle</span><span class="p">)]</span>
+    <span class="c1"># Get preferred angle</span>
+    <span class="n">preferred_angles</span><span class="p">[</span><span class="n">i_neuron</span><span class="p">]</span> <span class="o">=</span> <span class="n">reaching_angles</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">average_firing_rate_per_angle</span><span class="p">)]</span>
 
     <span class="c1"># Compute tuning index</span>
     <span class="n">max_firing_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">average_firing_rate_per_angle</span><span class="p">)</span>
     <span class="n">mean_to_other_angles</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">average_firing_rate_per_angle</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">average_firing_rate_per_angle</span><span class="p">))</span><span class="o">/</span><span class="mi">7</span>
     <span class="n">tuning_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_firing_rate</span> <span class="o">-</span> <span class="n">mean_to_other_angles</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_firing_rate</span> <span class="o">+</span> <span class="n">mean_to_other_angles</span><span class="p">)</span>
     <span class="n">tuning_indices</span><span class="p">[</span><span class="n">i_neuron</span><span class="p">]</span> <span class="o">=</span> <span class="n">tuning_index</span>
+
+<span class="c1"># Plot tuning indices</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">tuning_indices</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;Tuning index&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Number of neurons&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot preferred angles of tuned neurons (tuning index &gt; .5)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">preferred_angles</span><span class="p">[</span><span class="n">tuning_indices</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;Preferred Angle&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Number of neurons&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.7.17/x64/lib/python3.7/site-packages/ipykernel_launcher.py:59: RuntimeWarning: invalid value encountered in double_scalars
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1960</span><span class="o">/</span><span class="mf">3532650116.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> 
+<span class="g g-Whitespace">     </span><span class="mi">51</span>     <span class="c1"># Compute average firing rate per angle</span>
+<span class="ne">---&gt; </span><span class="mi">52</span>     <span class="n">average_firing_rate_per_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_angles</span><span class="p">,))</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span>     <span class="k">for</span> <span class="n">i_angle</span><span class="p">,</span> <span class="n">angle</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reaching_angles</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span>         <span class="n">relevant_trials</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">trial_angles</span><span class="o">==</span><span class="n">angle</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="ne">NameError</span>: name &#39;n_angles&#39; is not defined
 </pre></div>
 </div>
-<img alt="../_images/220b9a5f62da9d16fdba1bcd6715fc25d8bef044d92c2e9996a5bc14e512be54.png" src="../_images/220b9a5f62da9d16fdba1bcd6715fc25d8bef044d92c2e9996a5bc14e512be54.png" />
+<img alt="../_images/e117cacaced8ca5f965ef412bf6a34b84c4136ac40eef7dd75a53815e560f104.png" src="../_images/e117cacaced8ca5f965ef412bf6a34b84c4136ac40eef7dd75a53815e560f104.png" />
 </div>
+</div>
+<details>
+<summary> <font color='blue'>Click here for solution explanation </font></summary>
+<p>There will be solution video here when I live code.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">## Generate data</span>
+<span class="c1"># will turn above hidden cell into function and call it here</span>
+
+<span class="c1">## Plot rasters for example neuron</span>
+<span class="n">example_neuron_index</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">plot_spike_rasters</span><span class="p">(</span><span class="n">spikes</span><span class="p">,</span> <span class="n">trial_angles</span><span class="p">)</span>
+  <span class="c1"># within this function spike_times = convert_to_spike_times(spikes, trial_angles)</span>
+
+<span class="c1">### Compute tuning of each neuron</span>
+<span class="n">n_neurons</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">tuning_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_neurons</span><span class="p">,))</span>
+<span class="n">preferred_orientations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_neurons</span><span class="p">,))</span>
+<span class="k">for</span> <span class="n">i_neuron</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+
+    <span class="c1"># Compute average firing rate per angle</span>
+    <span class="n">firing_rate_per_angle</span> <span class="o">=</span> <span class="n">compute_firing_rate_per_angle</span><span class="p">(</span><span class="n">spikes</span><span class="p">[</span><span class="n">i_neuron</span><span class="p">],</span> <span class="n">trial_angles</span><span class="p">)</span>
+
+    <span class="c1"># Get preferred orientation</span>
+    <span class="n">preferred_orientations</span><span class="p">[</span><span class="n">i_neuron</span><span class="p">]</span> <span class="o">=</span> <span class="n">reaching_angles</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">firing_rate_per_angle</span><span class="p">)]</span>
+
+    <span class="c1"># Compute tuning index</span>
+    <span class="n">tuning_indices</span><span class="p">[</span><span class="n">i_neuron</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_tuning_index</span><span class="p">(</span><span class="n">firing_rate_per_angle</span><span class="p">)</span>
+
+<span class="n">plot_tuning_indices</span><span class="p">(</span><span class="n">tuning_indices</span><span class="p">)</span>
+<span class="n">plot_preferred_angle</span><span class="p">(</span><span class="n">tuning_indices</span><span class="p">,</span> <span class="n">preferred_orientations</span><span class="p">)</span>
+</pre></div>
 </div>
 </section>
 </section>
