@@ -24,8 +24,9 @@ def main():
 
     # Process all notebooks
     for notebook_file_path in notebook_list:
-        print(notebook_file_path)
-        pre_process_notebook(notebook_file_path)
+        if notebook_file_path.split('.')[-1]=='ipynb':
+            print(notebook_file_path)
+            pre_process_notebook(notebook_file_path)
 
 
 def pre_process_notebook(file_path):
