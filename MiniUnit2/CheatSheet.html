@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Keep it short and simple &#8212; Writing Correct &amp; Reproducible Scientific Code</title>
+    <title>Cheat sheet for readability practices &#8212; Writing Correct &amp; Reproducible Scientific Code</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'MiniUnit2/MiniUnit2_ReadabilityPracticeB';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'MiniUnit2/CheatSheet';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Know your language &amp; be consistent" href="MiniUnit2_ReadabilityPracticeC.html" />
-    <link rel="prev" title="Use good variable names" href="MiniUnit2_ReadabilityPracticeA.html" />
+    <link rel="next" title="Mini-unit #3: Writing Functions" href="../MiniUnit3/MiniUnit3_WritingClearFunctions.html" />
+    <link rel="prev" title="Use comments strategically" href="MiniUnit2_ReadabilityPracticeD.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -157,10 +157,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="MiniUnit2_Intro.html">Writing clean scripts</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="MiniUnit2_ReadabilityPracticeA.html">Use good variable names</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Keep it short and simple</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MiniUnit2_ReadabilityPracticeB.html">Keep it short and simple</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MiniUnit2_ReadabilityPracticeC.html">Know your language &amp; be consistent</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MiniUnit2_ReadabilityPracticeD.html">Use comments strategically</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CheatSheet.html">Cheat sheet for readability practices</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Cheat sheet for readability practices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../MiniUnit3/MiniUnit3_WritingClearFunctions.html">Mini-unit #3: Writing Functions</a></li>
@@ -213,73 +213,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://mybinder.org/v2/gh/ebatty/CorrectReadableScientificCode/main?urlpath=tree/MiniUnit2/MiniUnit2_ReadabilityPracticeB.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch onBinder"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="btn__text-container">Binder</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://colab.research.google.com/github/ebatty/CorrectReadableScientificCode/blob/main/MiniUnit2/MiniUnit2_ReadabilityPracticeB.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch onColab"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img src="../_static/images/logo_colab.png">
-  </span>
-<span class="btn__text-container">Colab</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="initThebeSBT()"
-  class="btn btn-sm btn-launch-thebe dropdown-item"
-  title="Launch Thebe"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-play"></i>
-  </span>
-<span class="btn__text-container">Live Code</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
 <div class="dropdown dropdown-download-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
     <i class="fas fa-download"></i>
@@ -288,7 +221,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/MiniUnit2/MiniUnit2_ReadabilityPracticeB.ipynb" target="_blank"
+      <li><a href="../_sources/MiniUnit2/CheatSheet.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -298,7 +231,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -370,7 +303,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Keep it short and simple</h1>
+    <h1>Cheat sheet for readability practices</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -380,9 +313,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video">Video</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exercise-putting-it-into-practice">Interactive Exercise: Putting it into practice</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-good-variable-names">Use good variable names</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-it-short-and-simple">Keep it short and simple</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#know-your-language-and-be-consistent">Know your language and be consistent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-comments-strategically">Use comments strategically</a></li>
 </ul>
             </nav>
         </div>
@@ -394,105 +328,48 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="keep-it-short-and-simple">
-<h1>Keep it short and simple<a class="headerlink" href="#keep-it-short-and-simple" title="Permalink to this heading">#</a></h1>
-<section id="video">
-<h2>Video<a class="headerlink" href="#video" title="Permalink to this heading">#</a></h2>
-<p>This video is from an outdated version but from 10:00 is basically the video that would appear here.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Video available at https://youtube.com/watch?v=oAV1oO1Flwk
-</pre></div>
-</div>
-<div class="output text_html">
-        <iframe
-            width="730"
-            height="410"
-            src="https://www.youtube.com/embed/oAV1oO1Flwk?fs=1&rel=0"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="cheat-sheet-for-readability-practices">
+<h1>Cheat sheet for readability practices<a class="headerlink" href="#cheat-sheet-for-readability-practices" title="Permalink to this heading">#</a></h1>
+<section id="use-good-variable-names">
+<h2>Use good variable names<a class="headerlink" href="#use-good-variable-names" title="Permalink to this heading">#</a></h2>
+<p>These should:</p>
+<ul class="simple">
+<li><p>Be nouns</p></li>
+<li><p>Be informative</p></li>
+<li><p>Be pronouncable and searchable</p></li>
+<li><p>Be consistent</p></li>
+<li><p>Be distinct</p></li>
+<li><p>Follow code style guide</p></li>
+<li><p>Exist: you should not have magic mysterious numbers not assigned to variables</p></li>
+<li><p>For Booleans: be affirmative and potentially contain the prefixes is or has</p></li>
+<li><p>Not have data type appended to variable name</p></li>
+</ul>
 </section>
-<section id="interactive-exercise-putting-it-into-practice">
-<h2>Interactive Exercise: Putting it into practice<a class="headerlink" href="#interactive-exercise-putting-it-into-practice" title="Permalink to this heading">#</a></h2>
-<p>For the code below, identify what makes it less readable and then try to update the code to fix this.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prior_password</span> <span class="o">=</span> <span class="s1">&#39;ilikedogs&#39;</span>
-<span class="n">password</span> <span class="o">=</span> <span class="s1">&#39;ilovedogsalot&#39;</span>
-
-<span class="n">MIN_PASSWORD_LENGTH</span> <span class="o">=</span> <span class="mi">12</span>
-
-<span class="c1"># Check if password is good to use</span>
-
-<span class="n">has_letters</span> <span class="o">=</span> <span class="n">checks_for_letters</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
-<span class="n">has_numbers</span> <span class="o">=</span> <span class="n">checks_for_numbers</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">password</span><span class="p">)</span><span class="o">&gt;=</span><span class="n">MIN_PASSWORD_LENGTH</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">password</span> <span class="o">!=</span> <span class="n">prior_password</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">has_letters</span> <span class="ow">and</span> <span class="n">has_numbers</span><span class="p">:</span>
-               <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Password is great&#39;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not usable: needs both letters and numbers&#39;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not usable: password is same as previous one&#39;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not usable: password is too short&#39;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not usable: password is not a string&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1880</span><span class="o">/</span><span class="mf">3996479942.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Check if password is good to use</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> 
-<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">has_letters</span> <span class="o">=</span> <span class="n">checks_for_letters</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">has_numbers</span> <span class="o">=</span> <span class="n">checks_for_numbers</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> 
-
-<span class="ne">NameError</span>: name &#39;checks_for_letters&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-<details>
-<summary> <font color='blue'>Click here for solution explanation </font></summary>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">prior_password</span> <span class="o">=</span> <span class="s1">&#39;ilikedogs&#39;</span>
-<span class="n">password</span> <span class="o">=</span> <span class="s1">&#39;ilovedogsalot&#39;</span>
-
-<span class="n">MIN_PASSWORD_LENGTH</span> <span class="o">=</span> <span class="mi">12</span>
-
-<span class="c1"># Check if password is good to use</span>
-<span class="n">has_letters</span> <span class="o">=</span> <span class="n">checks_for_letters</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
-<span class="n">has_numbers</span> <span class="o">=</span> <span class="n">checks_for_numbers</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not usable: password is not a string&#39;</span><span class="p">)</span>
-<span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">password</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">MIN_PASSWORD_LENGTH</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not usable: password is too short&#39;</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">password</span> <span class="o">==</span> <span class="n">prior_password</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not usable: password is same as previous one&#39;</span><span class="p">)</span>
-<span class="k">elif</span> <span class="ow">not</span> <span class="n">has_letters</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_numbers</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not usable: needs both letters and numbers&#39;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Password is great&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</details></section>
-<section id="recap">
-<h2>Recap<a class="headerlink" href="#recap" title="Permalink to this heading">#</a></h2>
-<p><strong>KEEP IT SHORT &amp; SIMPLE</strong></p>
+<section id="keep-it-short-and-simple">
+<h2>Keep it short and simple<a class="headerlink" href="#keep-it-short-and-simple" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Keep each line of code short</p></li>
 <li><p>Avoid overly clever code (prioritize readability over minimizing lines of code)</p></li>
 <li><p>Avoid overly nested code</p></li>
+</ul>
+</section>
+<section id="know-your-language-and-be-consistent">
+<h2>Know your language and be consistent<a class="headerlink" href="#know-your-language-and-be-consistent" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Follow language style guide (PEP8 for Python)</p></li>
+<li><p>Do same things the same way throughout your code base</p></li>
+<li><p>Use Python in-built functions, tools, and data types</p></li>
+</ul>
+</section>
+<section id="use-comments-strategically">
+<h2>Use comments strategically<a class="headerlink" href="#use-comments-strategically" title="Permalink to this heading">#</a></h2>
+<p>Good comments might:</p>
+<ul class="simple">
+<li><p>explain the intent of the programmer</p></li>
+<li><p>warn of consequences</p></li>
+<li><p>explain tricky code</p></li>
+<li><p>summarize a cohesive chunk of code</p></li>
+<li><p>reference relevant websites/books/etc.</p></li>
 </ul>
 </section>
 </section>
@@ -529,20 +406,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="MiniUnit2_ReadabilityPracticeA.html"
+       href="MiniUnit2_ReadabilityPracticeD.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Use good variable names</p>
+        <p class="prev-next-title">Use comments strategically</p>
       </div>
     </a>
     <a class="right-next"
-       href="MiniUnit2_ReadabilityPracticeC.html"
+       href="../MiniUnit3/MiniUnit3_WritingClearFunctions.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Know your language &amp; be consistent</p>
+        <p class="prev-next-title">Mini-unit #3: Writing Functions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -564,9 +441,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video">Video</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-exercise-putting-it-into-practice">Interactive Exercise: Putting it into practice</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-good-variable-names">Use good variable names</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-it-short-and-simple">Keep it short and simple</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#know-your-language-and-be-consistent">Know your language and be consistent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-comments-strategically">Use comments strategically</a></li>
 </ul>
   </nav></div>
 
