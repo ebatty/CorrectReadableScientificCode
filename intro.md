@@ -1,1 +1,1 @@
-# Writing Correct & Reproducible Scientific Code
+# Writing Readable & Correct Scientific Code
