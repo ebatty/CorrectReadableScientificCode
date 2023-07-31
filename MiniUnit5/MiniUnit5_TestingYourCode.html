@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'MiniUnit5/MiniUnit5_TestingYourCode';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Mini-unit #3: Writing Functions" href="../MiniUnit3/MiniUnit3_WritingClearFunctions.html" />
+    <link rel="prev" title="Mini-unit #4: Organizing your code base" href="../MiniUnit4/MiniUnit4_OrganizingYourCodeBase.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -163,6 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../MiniUnit3/MiniUnit3_WritingClearFunctions.html">Mini-unit #3: Writing Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MiniUnit4/MiniUnit4_OrganizingYourCodeBase.html">Mini-unit #4: Organizing your code base</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Mini-unit #5: Testing your code</a></li>
 
 
@@ -530,7 +531,7 @@ An easy step-up for testing is to use <code class="docutils literal notranslate"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1970</span><span class="o">/</span><span class="mf">30662821.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2055</span><span class="o">/</span><span class="mf">30662821.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Our solution</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> 
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="k">assert</span> <span class="n">is_prime</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">==</span><span class="kc">False</span>
@@ -652,14 +653,14 @@ An easy step-up for testing is to use <code class="docutils literal notranslate"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1970</span><span class="o">/</span><span class="mf">3202946684.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2055</span><span class="o">/</span><span class="mf">3202946684.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># All the same value</span>
 <span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span> <span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">outs</span> <span class="o">=</span> <span class="n">find_nth_from_ends</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="k">assert</span> <span class="n">outs</span> <span class="o">==</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">17</span> 
 
-<span class="nn">/tmp/ipykernel_1970/500920466.py</span> in <span class="ni">find_nth_from_ends</span><span class="nt">(array, n)</span>
+<span class="nn">/tmp/ipykernel_2055/500920466.py</span> in <span class="ni">find_nth_from_ends</span><span class="nt">(array, n)</span>
 <span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">sorted_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">unique_values</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">23</span> 
 <span class="ne">---&gt; </span><span class="mi">24</span>     <span class="k">return</span> <span class="n">sorted_array</span><span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">],</span> <span class="n">sorted_array</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
@@ -707,12 +708,12 @@ An easy step-up for testing is to use <code class="docutils literal notranslate"
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../MiniUnit3/MiniUnit3_WritingClearFunctions.html"
+       href="../MiniUnit4/MiniUnit4_OrganizingYourCodeBase.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Mini-unit #3: Writing Functions</p>
+        <p class="prev-next-title">Mini-unit #4: Organizing your code base</p>
       </div>
     </a>
 </div></div>
