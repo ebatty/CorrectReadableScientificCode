@@ -416,35 +416,17 @@ document.write(`
 <h2>Interactive Exercise: Putting it into practice<a class="headerlink" href="#interactive-exercise-putting-it-into-practice" title="Permalink to this heading">#</a></h2>
 <p>In the following exercise, look at each code snippet and determine whether the comment is useful, and why or why not. Click below each code snippet to reveal an explanation.</p>
 <p><em>Note to CENTER: This could be made more aesthetically pleasing with more of a flashcard interactive style if possible. Each code snippet on one panel and you click on it to flip it over and see the answer</em></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># used Plaugh analysis method from Plaugh et al, 2021 instead of</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># used Plaugh analysis method from Plaugh et al, 2021 instead of</span>
 <span class="c1"># simpler and more common Tafre one, because Tafre one took 3x</span>
 <span class="c1"># as long on this type of data</span>
 <span class="n">analyzed_data</span> <span class="o">=</span> <span class="n">analyze_using_plaugh_method</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1901</span><span class="o">/</span><span class="mf">1552088068.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># simpler and more common Tafre one, because Tafre one took 3x</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># as long on this type of data</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">analyzed_data</span> <span class="o">=</span> <span class="n">analyze_using_plaugh_method</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;analyze_using_plaugh_method&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
 <details>
 <summary> <font color='blue'>Click here for explanation </font></summary>
 <p>This comment is useful because it <strong>explains the intent</strong> of the programmer. It explains why the code is written this way, not what it is doing, which is harder to capture in just the code itself. This comment could save another user valuable time if they otherwise would have tried out the Tafre method.</p>
 <p>The comment is also useful because it <strong>references source material</strong> (the paper containing the analysis), which can be helpful for readers of the code to quickly find further details. Other great links to include in comments include referencing a codebase,StackOverflow question, or tutorial where the code snippet came from (as long as you have permission to use the code snippet).</p>
-</details><div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loop over account requests</span>
+</details><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># loop over account requests</span>
 <span class="k">for</span> <span class="n">account_request</span> <span class="ow">in</span> <span class="n">account_requests</span><span class="p">:</span>
 
    <span class="c1"># check if the person is over 18</span>
@@ -459,43 +441,12 @@ document.write(`
         <span class="n">account_request</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;declined&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1901</span><span class="o">/</span><span class="mf">1081985660.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># loop over account requests</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">for</span> <span class="n">account_request</span> <span class="ow">in</span> <span class="n">account_requests</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span>    <span class="c1"># check if the person is over 18</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>    <span class="k">if</span> <span class="n">account_request</span><span class="o">.</span><span class="n">user_age</span> <span class="o">&gt;</span> <span class="mi">18</span><span class="p">:</span>
-
-<span class="ne">NameError</span>: name &#39;account_requests&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
 <details>
 <summary> <font color='blue'>Click here for explanation </font></summary>
 <p>These comments are not useful because they are <strong>redundant</strong>. They say exactly what the code does and double the reading time.</p>
-</details><div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># x is time step length, y is number of spikes, z is number of neurons</span>
+</details><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># x is time step length, y is number of spikes, z is number of neurons</span>
 <span class="n">computation_result</span> <span class="o">=</span> <span class="n">analyze_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1901</span><span class="o">/</span><span class="mf">3007984301.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># x is time step length, y is number of spikes, z is number of neurons</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">computation_result</span> <span class="o">=</span> <span class="n">analyze_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;analyze_data&#39; is not defined
-</pre></div>
-</div>
-</div>
 </div>
 <details>
 <summary> <font color='blue'>Click here for explanation </font></summary>
@@ -503,31 +454,14 @@ document.write(`
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">computation_result</span> <span class="o">=</span> <span class="n">analyze_data</span><span class="p">(</span><span class="n">time_step_length</span><span class="p">,</span> <span class="n">number_of_spikes</span><span class="p">,</span> <span class="n">number_of_neurons</span><span class="p">)</span>
 </pre></div>
 </div>
-</details><div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code takes 5 hours to run on cpus, need gpus</span>
+</details><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># this code takes 5 hours to run on cpus, need gpus</span>
 <span class="n">analyzed_data</span> <span class="o">=</span> <span class="n">analyze_using_plaugh_method</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1901</span><span class="o">/</span><span class="mf">1835829622.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># this code takes 5 hours to run on cpus, need gpus</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">analyzed_data</span> <span class="o">=</span> <span class="n">analyze_using_plaugh_method</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;analyze_using_plaugh_method&#39; is not defined
-</pre></div>
-</div>
-</div>
 </div>
 <details>
 <summary> <font color='blue'>Click here for explanation </font></summary>
 <p>Comments that <strong>warn of consequences</strong> are useful, they can help future users of the code avoid trying to run the code with insufficient memory/time/etc.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># match genomic regions in the format &lt;id&gt;:&lt;start&gt;-&lt;end&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># match genomic regions in the format &lt;id&gt;:&lt;start&gt;-&lt;end&gt;</span>
 <span class="n">genomic_regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;([^:]+):(\d+)-(\d+)$&quot;</span>
 
 <span class="c1"># NOTE: need to come up with different example here as I took this from</span>
@@ -535,14 +469,10 @@ document.write(`
 <span class="c1"># and not CC-BY</span>
 </pre></div>
 </div>
-</div>
-</div>
 <details>
 <summary> <font color='blue'>Click here for explanation </font></summary>
 <p>Comments that <strong>explain tricky code</strong> are great, as long as you’ve tried to write the code in as readable a way as possible first.</p>
-</details><div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Compute neural firing rate</span>
+</details><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Compute neural firing rate</span>
 <span class="n">length_of_recording</span> <span class="o">=</span> <span class="n">spikes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">time_step_length</span>
 <span class="n">firing_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spikes</span><span class="p">)</span> <span class="o">/</span> <span class="n">length_of_recording</span>
 
@@ -556,22 +486,6 @@ document.write(`
     <span class="n">spike_triggered_average</span> <span class="o">+=</span> <span class="n">spikes</span><span class="p">[</span><span class="n">spiking_frame</span><span class="p">]</span> <span class="o">*</span> <span class="n">prior_stimulus_to_spike</span>
 <span class="n">spike_triggered_average</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spikes</span><span class="p">[</span><span class="n">number_of_frames_in_sta</span><span class="o">-</span> <span class="mi">1</span><span class="p">:])</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1901</span><span class="o">/</span><span class="mf">1114357380.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">## Compute neural firing rate</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">length_of_recording</span> <span class="o">=</span> <span class="n">spikes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">time_step_length</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">firing_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spikes</span><span class="p">)</span> <span class="o">/</span> <span class="n">length_of_recording</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> 
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1">## Compute spike triggered average</span>
-
-<span class="ne">NameError</span>: name &#39;spikes&#39; is not defined
-</pre></div>
-</div>
-</div>
 </div>
 <details>
 <summary> <font color='blue'>Click here for explanation </font></summary>
