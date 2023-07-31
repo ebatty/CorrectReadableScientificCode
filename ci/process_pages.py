@@ -16,9 +16,11 @@ def main():
         materials = yaml.load(fh, Loader=yaml.FullLoader)
 
     notebook_list = []
-    for i_part in range(len(materials['parts'])):
-        for i_chapter in range(len(materials['parts'][i_part]['chapters'])):
-            notebook_list.append( materials['parts'][0]['chapters'][i_chapter]['file'])
+    for i_chapter in range(len(materials['chapters'])):
+        notebook_list.append(materials['chapters'][i_chapter]['file'])
+        if 'sections' in materials['chapters'][i_chapter]:
+            for i_section in range(len(materials['chapters'][i_chapter]['sections'])):
+              notebook_list.append( materials['chapters'][i_chapter]['sections'][i_section]['file'])
 
     # Process all notebooks
     for notebook_file_path in notebook_list:
