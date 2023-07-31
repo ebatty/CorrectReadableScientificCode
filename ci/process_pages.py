@@ -24,6 +24,7 @@ def main():
 
     # Process all notebooks
     for notebook_file_path in notebook_list:
+        print(notebook_file_path)
         pre_process_notebook(notebook_file_path)
 
 
