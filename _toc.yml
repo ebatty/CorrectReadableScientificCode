@@ -11,5 +11,6 @@ chapters:
         - file: MiniUnit2/MiniUnit2_ReadabilityPracticeD.ipynb
         - file: MiniUnit2/CheatSheet.md
     - file: MiniUnit3/MiniUnit3_WritingClearFunctions.ipynb
+    - file: MiniUnit3/MiniUnit4_OrganizingYourCodeBase.ipynb
     - file: MiniUnit5/MiniUnit5_TestingYourCode.ipynb
     
